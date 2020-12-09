@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FruitController extends AbstractController
 {
     /**
-     * @Route("/", name="index", method={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -23,7 +23,7 @@ class FruitController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", method={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show($id)
     {
@@ -31,7 +31,7 @@ class FruitController extends AbstractController
     }
 
      /**
-     * @Route("/", name="create", method={"POST"})
+     * @Route("/", name="create", methods={"POST"})
      */
     public function create()
     {
@@ -39,7 +39,7 @@ class FruitController extends AbstractController
     }
 
      /**
-     * @Route("/{id}", name="update", method={"PUT", "PATCH"})
+     * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      */
     public function update($id)
     {
@@ -47,7 +47,7 @@ class FruitController extends AbstractController
     }
 
      /**
-     * @Route("/{id}", name="delete", method={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete($id)
     {
