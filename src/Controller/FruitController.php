@@ -28,7 +28,9 @@ class FruitController extends AbstractController
      */
     public function show($id)
     {
+        $fruit = $this->getDoctrine()->getRepository(Fruit::class)->find($id);
 
+        return $this->json(compact('fruit'));
     }
 
      /**
