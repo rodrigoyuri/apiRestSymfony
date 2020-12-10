@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Fruit;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,9 +34,26 @@ class FruitController extends AbstractController
      /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create()
+    public function create(Request $request)
     {
+        $data = $request->request->all();
 
+        $fruit = new Fruit();
+        $fruit->setName($data['name']);
+        $fruit->setDescription($data['description']);
+        $fruit->setPrice($data['price']);
+        $fruit->setSlug($data['slug']);
+        $fruit->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Sao_Paulo')));
+        $fruit->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Sao_Paulo')));
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $doctrine->persist($fruit);
+        $doctrine->flush();
+
+        return $this->json([
+            'data' => 'Curso cadastrada com Sucesso!'
+        ]);
     }
 
      /**
