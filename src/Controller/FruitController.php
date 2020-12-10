@@ -54,7 +54,7 @@ class FruitController extends AbstractController
         $doctrine->flush();
 
         return $this->json([
-            'data' => 'Curso cadastrada com Sucesso!'
+            'data' => 'Fruta cadastrada com Sucesso!'
         ]);
     }
 
@@ -92,7 +92,7 @@ class FruitController extends AbstractController
         $manager->flush();
 
         return $this->json([
-            'data' => 'Curso atualizado com Sucesso!'
+            'data' => 'Fruta atualizada com Sucesso!'
         ]);
     }
 
@@ -101,6 +101,16 @@ class FruitController extends AbstractController
      */
     public function delete($id)
     {
+        $doctrine = $this->getDoctrine();
 
+        $fruit = $doctrine->getRepository(Fruit::class)->find($id);
+
+        $manager = $doctrine->getManager();
+        $manager->remove($fruit);
+        $manager->flush();
+
+        return $this->json([
+            'data' => 'Fruta removida com Sucesso!'
+        ]);
     }
 }
