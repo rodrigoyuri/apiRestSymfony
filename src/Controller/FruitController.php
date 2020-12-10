@@ -61,9 +61,39 @@ class FruitController extends AbstractController
      /**
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
+        $data = $request->request->all();
 
+        $doctrine = $this->getDoctrine();
+
+        $fruit = $doctrine->getRepository(Fruit::class)->find($id);
+        
+        if($request->request->has('name')) {
+            $fruit->setName($data['name']);
+        }
+
+        if($request->request->has('description')) {
+            $fruit->setDescription($data['description']);
+        }
+
+        if($request->request->has('price')) {
+            $fruit->setPrice($data['price']);
+        }
+
+        if($request->request->has('slug')) {
+            $fruit->setSlug($data['slug']);
+        }
+        
+        $fruit->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Sao_Paulo')));
+
+        $manager = $doctrine->getManager();
+
+        $manager->flush();
+
+        return $this->json([
+            'data' => 'Curso atualizado com Sucesso!'
+        ]);
     }
 
      /**
