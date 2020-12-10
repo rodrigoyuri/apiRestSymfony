@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/fruit", name="fruit_")
+ * @Route("/fruits", name="fruit_")
  */
 class FruitController extends AbstractController
 {
